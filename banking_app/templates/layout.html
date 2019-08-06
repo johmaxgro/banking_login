@@ -20,12 +20,21 @@
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="/">Your Online Banking App</a>
+          <a class="navbar-brand mr-4" href="/">{{ header }}</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
         </div>
       </nav>
     </header>
+
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-12">
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+    </main>
+
 </body>
 </html>
