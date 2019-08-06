@@ -11,16 +11,16 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
     {% if title %}
-        <title>Banking App - {{ title }}</title>
+        <title>{{ title }}</title>
     {% else %}
-        <title>Banking App</title>
+        <title>Good Online Bank</title>
     {% endif %}
 </head>
 <body>
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="/">{{ header }}</a>
+          <a class="navbar-brand mr-4" href="/">{{ title }}</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -36,5 +36,16 @@
       </div>
     </main>
 
+    <div class="col-md-6 mx-auto">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+    </div>
 </body>
 </html>

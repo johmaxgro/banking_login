@@ -4,6 +4,7 @@ from banking_app.models import User
 from banking_app.forms import LoginForm, RegisterForm
 from flask_login import login_user, current_user, logout_user, login_required
 
+title = 'Good Online Bank'
 
 @app.route('/')
 
@@ -11,7 +12,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 def main():
 	if not current_user.is_authenticated:
 		return redirect(url_for('login'))
-	return render_template('main.html', title='Your Online Banking App', header='Your Personal Account', user=current_user)
+	return render_template('main.html', title=title, header='Your Personal Account', user=current_user)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -23,9 +24,9 @@ def register():
 		user = User(name=form.name.data, surname=form.surname.data, email=form.email.data, password=hash_pw)
 		db.session.add(user)
 		db.session.commit()
-		flash('You are now registered! Log in to reach to Account', 'success')
+		flash('You are now registered! You can log in to your Account.', 'success')
 		return redirect(url_for('login'))
-	return render_template('register.html', title='Your Online Banking App', header='Register Your Online Banking Account', form=form)
+	return render_template('register.html', title=title, header='Register Your Online Banking Account', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -40,7 +41,7 @@ def login():
 			return redirect(url_for('main', user=user))
 		else:
 			flash('Login failed. Please check if your email and password are correct.', 'danger')
-	return render_template('login.html', title='Your Online Banking App', header='Log in to your Account', form=form)
+	return render_template('login.html', title=title, header='Log in to your Account', form=form)
 
 @app.route("/logout")
 def logout():

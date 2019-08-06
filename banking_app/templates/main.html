@@ -1,9 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
-	<h1>Hello {{ user.name }}!</h1>
-	<div>First Name: {{ user.name }}</div>
-	<div>Last Name: {{ user.surname }}</div>
-	<div>Email: {{ user.email }}</div>
-
-	<a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+	<div class="col-md-6 mx-auto">
+		<h1>Hello {{ user.name }}!</h1>
+		<div class="card align-items-center" style="width: 18rem;">
+  		<div class="card-body text-center">
+			<h6 class="card-subtitle mb-2 text-muted">First Name</h6>
+			<p class="card-text text-center">{{ user.name }}</p>
+			<h6 class="card-subtitle mb-2 text-muted">Last Name</h6>
+			<p class="card-text">{{ user.surname }}</p>
+			<h6 class="card-subtitle mb-2 text-muted">Email</h6>
+			<p class="card-text">{{ user.email }}</p>
+			<div class="col-md-12 mx-auto">
+		   		<a href="{{ url_for('logout') }}" class="card-link">Logout</a>
+		   	</div>
+  		</div>
+		</div>
+	</div>
 {% endblock content %}
