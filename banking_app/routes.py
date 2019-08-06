@@ -11,7 +11,6 @@ from flask_login import login_user, current_user, logout_user, login_required
 def main():
 	if not current_user.is_authenticated:
 		return redirect(url_for('login'))
-	# user = session['current_user']
 	return render_template('main.html', title='Your Online Banking App', header='Your Personal Account', user=current_user)
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -43,3 +42,7 @@ def login():
 			flash('Login failed. Please check if your email and password are correct.', 'danger')
 	return render_template('login.html', title='Your Online Banking App', header='Log in to your Account', form=form)
 
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('login'))

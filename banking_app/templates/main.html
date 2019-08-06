@@ -4,4 +4,6 @@
 	<div>First Name: {{ user.name }}</div>
 	<div>Last Name: {{ user.surname }}</div>
 	<div>Email: {{ user.email }}</div>
+
+	<a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
 {% endblock content %}
