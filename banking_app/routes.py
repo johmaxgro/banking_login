@@ -32,4 +32,12 @@ def login():
 	if current_user.is_authenticated:
 		return redirect(url_for('main'))
 	form = LoginForm()
+	if form.validate_on_submit():
+		user = User.query.filter_by(email=form.email.data).first()
+		if user and bcrypt.check_password_hash(user.password, form.password.data):
+			login_user(user, remember=True)
+			return redirect(url_for('main'))
+		else:
+			flash('Login failed. Please check if your email and password are correct.', 'danger')
 	return render_template('login.html', title='Your Online Banking App', header='Log in to your Account', form=form)
+
