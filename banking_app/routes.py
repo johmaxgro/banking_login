@@ -37,7 +37,7 @@ def login():
 		user = User.query.filter_by(email=form.email.data).first()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
 			login_user(user, remember=True)
-			return redirect(url_for('main', user=user))
+			return redirect(url_for('main'))
 		else:
 			flash('Login failed. Please check if your email and password are correct.', 'danger')
 	return render_template('login.html', title=title, header='Log in to your Account', form=form)
