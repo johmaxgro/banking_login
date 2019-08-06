@@ -1,4 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-	<div>Hi! </div>
+	<h1>Hello {{ user.name }}!</h1>
+	<div>First Name: {{ user.name }}</div>
+	<div>Last Name: {{ user.surname }}</div>
+	<div>Email: {{ user.email }}</div>
 {% endblock content %}

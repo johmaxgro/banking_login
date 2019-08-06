@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, session
 from banking_app import app, db, bcrypt
 from banking_app.models import User
 from banking_app.forms import LoginForm, RegisterForm
@@ -11,7 +11,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 def main():
 	if not current_user.is_authenticated:
 		return redirect(url_for('login'))
-	return render_template('main.html', title='Your Online Banking App', header='Your Personal Account')
+	# user = session['current_user']
+	return render_template('main.html', title='Your Online Banking App', header='Your Personal Account', user=current_user)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -36,7 +37,8 @@ def login():
 		user = User.query.filter_by(email=form.email.data).first()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
 			login_user(user, remember=True)
-			return redirect(url_for('main'))
+			# session['current_user'] = user
+			return redirect(url_for('main', user=user))
 		else:
 			flash('Login failed. Please check if your email and password are correct.', 'danger')
 	return render_template('login.html', title='Your Online Banking App', header='Log in to your Account', form=form)
